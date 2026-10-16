@@ -1,0 +1,19 @@
+<div class="app-shell" [class.light]="!darkMode">
+  <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+    {{ darkMode ? '☀️' : '🌙' }}
+  </button>
+
+  <header class="app-header">
+    <div class="logo">🔬</div>
+    <h1>Device Finder</h1>
+    <p>Answer a few questions and we'll recommend the right device for your needs.</p>
+  </header>
+
+  <main class="app-content">
+    <app-questionnaire></app-questionnaire>
+  </main>
+
+  <footer class="app-footer">
+    Scientific Products
+  </footer>
+</div>

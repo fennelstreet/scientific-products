@@ -1,0 +1,134 @@
+<section class="questionnaire" [@fadeSlide]>
+  <div *ngIf="isLoading" class="state-message">
+    <span class="loader"></span>
+    Loading device data...
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="state-message error">{{ errorMessage }}</div>
+
+  <ng-container *ngIf="!isLoading && !errorMessage">
+    <!-- Progress bar -->
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progressPercent"></div>
+    </div>
+
+    <ng-container *ngIf="!isComplete; else resultsTemplate">
+      <div class="question-meta">
+        <span class="step-badge">{{ currentQuestionIndex + 1 }} / {{ questionKeys.length }}</span>
+        <span class="device-count">
+          <span class="device-count-number">{{ remainingDevices.length }}</span> device{{ remainingDevices.length === 1 ? '' : 's' }} remaining
+        </span>
+      </div>
+
+      <h2>{{ currentQuestionKey }}</h2>
+      <p class="helper-text" *ngIf="isSingleSelectQuestion">Pick one option below.</p>
+      <p class="helper-text" *ngIf="!isSingleSelectQuestion">Select all that apply, then press continue.</p>
+
+      <div class="answers" [class.single-select]="isSingleSelectQuestion">
+        <ng-container *ngIf="isSingleSelectQuestion">
+          <button
+            type="button"
+            class="answer-option single-choice"
+            *ngFor="let answer of availableAnswers; trackBy: trackByAnswer"
+            (click)="selectSingleAnswer(answer)"
+          >
+            <span class="option-dot"></span>
+            {{ answer }}
+          </button>
+        </ng-container>
+        <ng-container *ngIf="!isSingleSelectQuestion">
+          <div class="dropdown-container">
+            <div class="selected-chips" *ngIf="currentSelections.length > 0">
+              <span class="chip" *ngFor="let sel of currentSelections">
+                {{ sel }}
+                <button type="button" class="chip-remove" (click)="toggleSelection(sel, false)">&times;</button>
+              </span>
+            </div>
+            <button type="button" class="dropdown-trigger" (click)="dropdownOpen = !dropdownOpen">
+              <span>{{ currentSelections.length === 0 ? 'Select ' + currentQuestionKey + '...' : 'Add more...' }}</span>
+              <span class="dropdown-arrow" [class.open]="dropdownOpen">▾</span>
+            </button>
+            <div class="dropdown-list" *ngIf="dropdownOpen">
+              <input
+                type="text"
+                class="dropdown-search"
+                placeholder="Type to filter..."
+                [(ngModel)]="searchFilter"
+              />
+              <div class="dropdown-options">
+                <div
+                  class="dropdown-item"
+                  *ngFor="let answer of filteredAnswers; trackBy: trackByAnswer"
+                  [class.selected]="isSelected(answer)"
+                  (click)="toggleSelection(answer, !isSelected(answer))"
+                >
+                  <span class="check-box" [class.checked]="isSelected(answer)">
+                    <span *ngIf="isSelected(answer)">✓</span>
+                  </span>
+                  <span>{{ answer }}</span>
+                </div>
+                <div class="dropdown-item no-results" *ngIf="filteredAnswers.length === 0">
+                  No matching options
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-backdrop" *ngIf="dropdownOpen" (click)="dropdownOpen = false"></div>
+        </ng-container>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-back" (click)="goBack()" [disabled]="!canGoBack">
+          ← Back
+        </button>
+        <button
+          *ngIf="!isSingleSelectQuestion"
+          type="button"
+          class="btn-next"
+          (click)="submitCurrentAnswer()"
+          [disabled]="currentSelections.length === 0"
+        >
+          Continue →
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-template #resultsTemplate>
+      <div class="results-header">
+        <div class="results-icon">🎯</div>
+        <h2>We found {{ remainingDevices.length }} matching device{{ remainingDevices.length === 1 ? '' : 's' }}</h2>
+        <p class="helper-text" *ngIf="remainingDevices.length > 0">Ranked from best to least suited for your needs.</p>
+      </div>
+
+      <div *ngIf="remainingDevices.length > 0; else noResultsTemplate" class="results-list">
+        <div class="result-card" *ngFor="let device of displayedDevices; let i = index">
+          <span class="result-rank">#{{ i + 1 }}</span>
+          <span class="result-name">{{ device }}</span>
+        </div>
+        <button
+          *ngIf="remainingDevices.length > 3 && !showAllResults"
+          type="button"
+          class="see-more"
+          (click)="showAllResults = true"
+        >
+          Show {{ remainingDevices.length - 3 }} more device{{ remainingDevices.length - 3 === 1 ? '' : 's' }}
+        </button>
+      </div>
+
+      <ng-template #noResultsTemplate>
+        <div class="no-results-box">
+          <div class="no-results-icon">😔</div>
+          <p>No devices matched all your criteria.</p>
+          <p class="helper-text">Please contact us for personalised assistance:</p>
+          <a class="contact-link" href="mailto:william.maroy@scientificproducts.com">william.maroy@scientificproducts.com</a>
+        </div>
+      </ng-template>
+
+      <div class="actions">
+        <button type="button" class="btn-next" (click)="restartQuestionnaire()">
+          ↻ Start over
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+</section>

@@ -1,0 +1,195 @@
+:host {
+  display: block;
+}
+
+.app-shell {
+  // Dark theme (default)
+  --bg-shell: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --color-title-from: #60a5fa;
+  --color-title-to: #a78bfa;
+  --color-subtitle: #94a3b8;
+  --color-footer: #475569;
+  --toggle-bg: rgba(255, 255, 255, 0.08);
+  --toggle-hover: rgba(255, 255, 255, 0.15);
+
+  // Card
+  --card-bg: #1e293b;
+  --card-border: rgba(148, 163, 184, 0.12);
+  --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  // Progress
+  --progress-track: rgba(255, 255, 255, 0.06);
+
+  // Text
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-chip: #c7d2fe;
+
+  // Interactive
+  --surface-hover: rgba(255, 255, 255, 0.04);
+  --surface-hover-strong: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(148, 163, 184, 0.12);
+  --border-hover: rgba(129, 140, 248, 0.4);
+  --accent-surface: rgba(99, 102, 241, 0.1);
+  --accent-surface-strong: rgba(99, 102, 241, 0.15);
+  --accent-border: rgba(129, 140, 248, 0.3);
+  --dot-bg: rgba(255, 255, 255, 0.08);
+  --dot-border: #475569;
+
+  // Dropdown
+  --dropdown-bg: #1e293b;
+  --dropdown-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --dropdown-search-bg: rgba(255, 255, 255, 0.04);
+  --dropdown-search-focus: rgba(255, 255, 255, 0.06);
+  --dropdown-placeholder: #475569;
+  --dropdown-item-text: #cbd5e1;
+  --dropdown-item-hover: rgba(255, 255, 255, 0.05);
+  --scrollbar-thumb: rgba(148, 163, 184, 0.2);
+
+  // Checkbox
+  --check-bg: rgba(255, 255, 255, 0.06);
+  --check-border: #475569;
+
+  // Results
+  --result-top-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
+  --result-top-border: rgba(129, 140, 248, 0.25);
+  --result-name: #e2e8f0;
+  --no-result-border: rgba(148, 163, 184, 0.15);
+  --no-result-text: #94a3b8;
+
+  // Buttons
+  --btn-back-bg: rgba(255, 255, 255, 0.06);
+  --btn-back-text: #94a3b8;
+  --btn-back-hover-bg: rgba(255, 255, 255, 0.1);
+  --btn-back-hover-text: #e2e8f0;
+
+  background: var(--bg-shell);
+  min-height: 100vh;
+  padding: 2.5rem 1.5rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: background 0.35s ease;
+}
+
+// Light theme overrides
+.app-shell.light {
+  --bg-shell: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+  --color-title-from: #4f46e5;
+  --color-title-to: #7c3aed;
+  --color-subtitle: #64748b;
+  --color-footer: #94a3b8;
+  --toggle-bg: rgba(0, 0, 0, 0.06);
+  --toggle-hover: rgba(0, 0, 0, 0.1);
+
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+  --progress-track: rgba(0, 0, 0, 0.06);
+
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-chip: #4338ca;
+
+  --surface-hover: rgba(0, 0, 0, 0.02);
+  --surface-hover-strong: rgba(0, 0, 0, 0.04);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(99, 102, 241, 0.5);
+  --accent-surface: rgba(99, 102, 241, 0.06);
+  --accent-surface-strong: rgba(99, 102, 241, 0.1);
+  --accent-border: rgba(99, 102, 241, 0.25);
+  --dot-bg: rgba(0, 0, 0, 0.04);
+  --dot-border: #cbd5e1;
+
+  --dropdown-bg: #ffffff;
+  --dropdown-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --dropdown-search-bg: #f8fafc;
+  --dropdown-search-focus: #f1f5f9;
+  --dropdown-placeholder: #94a3b8;
+  --dropdown-item-text: #334155;
+  --dropdown-item-hover: rgba(0, 0, 0, 0.03);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.12);
+
+  --check-bg: rgba(0, 0, 0, 0.04);
+  --check-border: #cbd5e1;
+
+  --result-top-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
+  --result-top-border: rgba(99, 102, 241, 0.2);
+  --result-name: #1e293b;
+  --no-result-border: rgba(0, 0, 0, 0.1);
+  --no-result-text: #64748b;
+
+  --btn-back-bg: rgba(0, 0, 0, 0.05);
+  --btn-back-text: #64748b;
+  --btn-back-hover-bg: rgba(0, 0, 0, 0.08);
+  --btn-back-hover-text: #1e293b;
+}
+
+// Theme toggle
+.theme-toggle {
+  background: var(--toggle-bg);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.25rem;
+  height: 42px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  transition: background 0.2s, transform 0.2s;
+  width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: var(--toggle-hover);
+    transform: scale(1.1);
+  }
+}
+
+.app-header {
+  margin: 0 auto 2rem;
+  max-width: 720px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.app-header h1 {
+  background: linear-gradient(135deg, var(--color-title-from), var(--color-title-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.app-header p {
+  color: var(--color-subtitle);
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.app-content {
+  margin: 0 auto;
+  max-width: 720px;
+  width: 100%;
+  flex: 1;
+}
+
+.app-footer {
+  color: var(--color-footer);
+  font-size: 0.8rem;
+  margin: 2.5rem auto 0;
+  text-align: center;
+}
